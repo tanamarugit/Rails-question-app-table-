@@ -1,1 +1,0 @@
-# Rails-question-app-table-

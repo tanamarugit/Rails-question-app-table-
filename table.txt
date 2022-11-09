@@ -7,6 +7,7 @@ password_digest: string
 created_at: datetime
 updated_at: datetime
 avatar: string
+admin: boolean default: false, null: false
 -------------
 
 
@@ -52,3 +53,5 @@ questions テーブルにstatusカラムを追加してみました。statusに�
 
 質問の解決,未解決がわかるよう、solved_checkカラムを追加しました。true,falseがわかってほしいので、boolean型です。
 デフォルトは未解決です。trueかfalseが分かればいいので、nullはいりません。よって、Notnull成約をかけました。
+
+管理画面用にadminを追加

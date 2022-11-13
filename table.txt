@@ -1,0 +1,57 @@
+users テーブル
+------------
+id: integer
+name: string
+email: string
+password_digest: string
+created_at: datetime
+updated_at: datetime
+avatar: string
+admin: boolean default: false, null: false
+-------------
+
+
+
+questions テーブル
+----------------
+id: integer
+title: string
+body: text
+created_at: datetime
+updated_at: datetime
+user_id: integer
+solved_check: boolean, default: false, null: false
+---------------
+↑に誰が投稿したかわかるように、user_idを紐付ける。
+
+
+
+answers テーブル
+--------------
+id: integer
+body: text
+question_id: integer
+created_at: datetime
+updated_at: datetime
+user_id: integer
+---------------
+↑に誰が投稿したかわかるように、user_idを紐付ける。
+
+
+ユーザーはニックネームとアバター画像を登録できる
+↓
+ニックネームについては、usersテーブルのnameが該当するのではないでしょうか？
+アバター画像を登録するには、画像をアップロードする必要があると考えます。
+調べてみると、Active Storage、Paperclip, Carrierwave, Dragonfly　といったものがあることを知りました。
+↓
+データベースに画像データが入るカラムが必要がだとわかり、usersテーブルにavatarカラムを追加しました。
+
+ユーザーは質問を解決済み状態に変更できる
+↓
+questions テーブルにstatusカラムを追加してみました。statusには、1か2を入れる形にして、1＝未解決、2=解決済み、という感じにします。後はif文で、1＝未解決、2=解決済みかを判定し表示するという流れです。
+↓変更
+
+質問の解決,未解決がわかるよう、solved_checkカラムを追加しました。true,falseがわかってほしいので、boolean型です。
+デフォルトは未解決です。trueかfalseが分かればいいので、nullはいりません。よって、Notnull成約をかけました。
+
+管理画面用にadminを追加
